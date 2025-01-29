@@ -1,0 +1,29 @@
+---
+# collections:
+#   - community.general
+#
+# dependencies: []
+
+galaxy_info:
+  role_name: "user_management"
+  author: "Xenion1987"
+  description: "Template repository for creating ansible roles"
+  company: "Access-InTech"
+  license: "BSD, MIT"
+  min_ansible_version: "2.11"
+  # platforms:
+  #   - name: Debian
+  #     versions:
+  #       - all
+  #   - name: Rocky
+  #     versions:
+  #       - all
+  #   - name: Ubuntu
+  #     versions:
+  #       - all
+  # galaxy_tags:
+  #   - authorizedkeys
+  #   - groups
+  #   - sudoers
+  #   - system
+  #   - users

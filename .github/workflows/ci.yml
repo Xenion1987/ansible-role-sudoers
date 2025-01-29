@@ -1,0 +1,65 @@
+name: CI Pipeline
+
+env:
+  role_name: my_role
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+defaults:
+  run:
+    working-directory: "${role_name}"
+
+jobs:
+  ansible-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          path: "${role_name}"
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install role requirements
+        run: |
+          [ -s requirements.txt ] && pip install -r requirements.txt
+          [ -s requirements.yml ] && ansible-galaxy collection install -r requirements.yml
+
+      - name: Install ansible-lint
+        run: |
+          pip install ansible-lint
+
+      - name: Run ansible-lint
+        run: ansible-lint
+
+  ansible-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          path: "${role_name}"
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install role requirements
+        run: |
+          [ -s requirements.txt ] && pip install -r requirements.txt
+          [ -s requirements.yml ] && ansible-galaxy collection install -r requirements.yml
+
+      - name: Install Ansible
+        run: |
+          pip install ansible
+
+      - name: Run Ansible Playbook
+        run: ansible-playbook tests/test.yml
