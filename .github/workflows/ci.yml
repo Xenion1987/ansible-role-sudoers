@@ -1,7 +1,7 @@
 name: CI Pipeline
 
 env:
-  role_name: my_role
+  role_name: sudoers
 
 on:
   push:

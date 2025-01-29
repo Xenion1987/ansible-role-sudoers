@@ -1,5 +1,7 @@
-#SPDX-License-Identifier: MIT-0
 ---
-- hosts: localhost
+- name: "Test: role sudoers"
+  hosts: localhost
+  become: true
+
   roles:
-    - new_role
+    - "../../sudoers"

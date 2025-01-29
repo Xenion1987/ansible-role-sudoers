@@ -1,3 +1,19 @@
-#SPDX-License-Identifier: MIT-0
 ---
-# defaults file for new_role
+sudoers_install_sudo: true
+sudoers_manage_group_files: false
+sudoers_groups:
+  - name: sudoers_mygroupname
+    group: sudoers_mygroupname
+    commands:
+      - ALL
+    nopassword: false
+    state: absent
+
+sudoers_manage_user_files: false
+sudoers_users:
+  - name: sudoers_john.doe
+    user: sudoers_john.doe
+    commands:
+      - ALL
+    nopassword: false
+    state: absent

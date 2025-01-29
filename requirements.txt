@@ -2,4 +2,3 @@
 ansible>=3.0.0
 ansible-core>=2.11
 ansible-lint
-jinja2

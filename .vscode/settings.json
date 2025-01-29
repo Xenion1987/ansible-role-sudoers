@@ -8,7 +8,7 @@
       "**/meta/*.y*ml": "ansible",
       ".ansible-lint": "yaml"
   },
-  "ansible.python.interpreterPath": "WORKSPACE_PATH/venv/bin/python",
-  "ansible.ansible.path": "WORKSPACE_PATH/venv/bin/ansible",
+  "ansible.python.interpreterPath": "/home/mrvn/syncThing/workspace/ansible-role-sudoers/venv/bin/python",
+  "ansible.ansible.path": "/home/mrvn/syncThing/workspace/ansible-role-sudoers/venv/bin/ansible",
   "python.terminal.activateEnvironment": true,
 }
