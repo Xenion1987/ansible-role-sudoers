@@ -1,37 +1,62 @@
-# template-ansible-role
+ Ansible role: sudoers
+===
 
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit) ![ansible-tests](https://github.com/Xenion1987/template-ansible-role/actions/workflows/ci.yml/badge.svg)
+Manage user or group sudoers files on Linux systems.
 
-## Replace placeholder
+Requirements
+---
 
-### `.github/workflows/ci.yml`
+- Collections:
+  - community.general
+- Min. Ansible version: 2.11
 
-Replace `env.role_name: my_role` with the new role name.
+Role Variables
+---
 
-### `.vscode/settings.json`
+main
+---
 
-Replace directory placeholder `WORKSPACE_PATH` with the current working directory's `venv` path.
+| Variable | Type | Required | Choices | Default | Description |
+| --- | --- | --- | --- | --- | --- |
+| `sudoers_install_sudo` | `bool` | `false` | `false`, `true` | `true` | Installs `sudo` if set to `true`. |
+| `sudoers_manage_group_files` | `bool` | `false` | `false`, `true` | `false` | Enable or disable sudoers management for groups. |
+| `sudoers_manage_user_files` | `bool` | `false` | `false`, `true` | `false` | Enable or disable sudoers management for users. |
+| `sudoers_groups` | `list` | `false` | | `[]` | A list of sudoers configurations for groups. |
+| `sudoers_groups.commands` | `list` | `false` | | `[]` | The commands allowed by the sudoers rule. <br />Multiple can be added by passing a list of commands. <br />Use `ALL` for all commands. |
+| `sudoers_groups.group` | `str` | `false` | | | The name of the group for the sudoers rule. <br />This option cannot be used in conjunction with `user`. |
+| `sudoers_groups.name` | `str` | `true` | | `sudoers_mygroupname` | The name of the sudoers rule. |
+| `sudoers_groups.nopassword` | `bool` | `false` | `false`, `true` | `false` | Whether a password will be required to run the `sudo`'d command. |
+| `sudoers_groups.state` | `str` | `true` | `absent`, `present` | `present` | Whether the rule should exist or not. |
+| `sudoers_users` | `list` | `false` | | `[]` | A list of sudoers configurations for users. |
+| `sudoers_users.commands` | `list` | `false` | | `[]` | The commands allowed by the sudoers rule. <br />Multiple can be added by passing a list of commands. <br />Use `ALL` for all commands. |
+| `sudoers_users.name` | `str` | `true` | | `sudoers_john.doe` | The name of the sudoers rule. |
+| `sudoers_users.nopassword` | `bool` | `false` | `false`, `true` | `false` | Whether a password will be required to run the `sudo`'d command. |
+| `sudoers_users.state` | `str` | `true` | `absent`, `present` | `present` | Whether the rule should exist or not. |
+| `sudoers_users.user` | `str` | `false` | | | The name of the user for the sudoers rule. <br />This option cannot be used in conjunction with `group`. |
 
-```sh
-sed -i s,WORKSPACE_PATH,${PWD}, .vscode/settings.json
+
+
+Dependencies
+---
+
+None
+
+Example Playbook
+---
+
+```yaml
+- name: "Play | sudoers"
+  hosts: all
+  roles:
+    - role: sudoers
 ```
 
-### OPTIONAL: Copy/move `.example.envrc` to `.envrc`
+License
+---
 
-Requires [`direnv`](https://direnv.net/) to be installed and hooked into your shell.
+BSD, MIT
 
-### `meta/main.yml`
+Author Information
+---
 
-Update all `meta` informations to fit to your requirements.
-
-### `meta/argument-specs.yml`
-
-Explain all variables within this file. This also can be used to auto-generate a `README.md` file. Follow instructions on [docs.ansible.com](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html#role-argument-validation).
-
-### `tests/test.yml`
-
-Replace `my_role` with the new role name. Create tasks for testing porposes when pushing to GitHub/GitLab and run automated tests.
-
-### `README.md`
-
-Replace the template repo URL `github.com/Xenion1987/template-ansible-role` with the new repo URL.
+Xenion1987 @ Access-InTech

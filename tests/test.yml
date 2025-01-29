@@ -1,5 +1,24 @@
-#SPDX-License-Identifier: MIT-0
 ---
-- hosts: localhost
+- name: "Test: role sudoers"
+  hosts: localhost
+  become: true
+  vars:
+    sudoers_install_sudo: true
+    sudoers_users:
+      - name: 30-john.doe
+        user: john.doe
+        commands:
+          - ALL
+        nopassword: true
+        state: present
+    sudoers_manage_group_files: true
+    sudoers_groups:
+      - name: 20-playground
+        group: playground
+        commands:
+          - ALL
+        nopassword: true
+        state: present
+
   roles:
-    - new_role
+    - "../../sudoers"

@@ -1,8 +1,5 @@
 name: CI Pipeline
 
-env:
-  role_name: my_role
-
 on:
   push:
     branches:
@@ -11,7 +8,7 @@ on:
 
 defaults:
   run:
-    working-directory: "${role_name}"
+    working-directory: "sudoers"
 
 jobs:
   ansible-lint:
@@ -20,7 +17,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
         with:
-          path: "${role_name}"
+          path: "sudoers"
 
       - name: Set up Python 3.
         uses: actions/setup-python@v5
@@ -45,7 +42,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
         with:
-          path: "${role_name}"
+          path: "sudoers"
 
       - name: Set up Python 3.
         uses: actions/setup-python@v5
@@ -62,4 +59,4 @@ jobs:
           pip install ansible
 
       - name: Run Ansible Playbook
-        run: ansible-playbook tests/test.yml
+        run: ansible-playbook  -i tests/inventory.yml tests/test.yml
