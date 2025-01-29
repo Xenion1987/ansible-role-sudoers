@@ -59,4 +59,4 @@ jobs:
           pip install ansible
 
       - name: Run Ansible Playbook
-        run: ansible-playbook tests/test.yml
+        run: ansible-playbook  -i tests/inventory.yml tests/test.yml
