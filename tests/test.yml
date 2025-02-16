@@ -1,12 +1,12 @@
 ---
-- name: "Test: role sudoers"
+- name: "TEST | ROLE | sudoers"
   hosts: localhost
   become: true
   vars:
     sudoers_install_sudo: true
     sudoers_manage_group_files: true
     sudoers_groups:
-      - name: sudoers_mygroupname
+      - name: sudoers_group_file
         group: sudoers_mygroupname
         commands:
           - ALL
@@ -15,8 +15,8 @@
 
     sudoers_manage_user_files: true
     sudoers_users:
-      - name: sudoers_john.doe
-        user: sudoers_john.doe
+      - name: sudoers_user_file
+        user: john.doe
         commands:
           - ALL
         nopassword: false
