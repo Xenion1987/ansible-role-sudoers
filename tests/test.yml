@@ -4,21 +4,22 @@
   become: true
   vars:
     sudoers_install_sudo: true
-    sudoers_users:
-      - name: 30-john.doe
-        user: john.doe
-        commands:
-          - ALL
-        nopassword: true
-        state: present
     sudoers_manage_group_files: true
     sudoers_groups:
-      - name: 20-playground
-        group: playground
+      - name: sudoers_mygroupname
+        group: sudoers_mygroupname
         commands:
           - ALL
-        nopassword: true
+        nopassword: false
         state: present
 
+    sudoers_manage_user_files: true
+    sudoers_users:
+      - name: sudoers_john.doe
+        user: sudoers_john.doe
+        commands:
+          - ALL
+        nopassword: false
+        state: present
   roles:
     - "../../sudoers"
