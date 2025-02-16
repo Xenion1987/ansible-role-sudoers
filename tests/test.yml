@@ -22,7 +22,7 @@
         nopassword: false
         state: present
   roles:
-    - "../../sudoers"
+    - ../sudoers
 
   tasks:
     - name: DEBUG | sudoers_group_file
