@@ -10,7 +10,7 @@
         group: sudoers_mygroupname
         commands:
           - ALL
-        nopassword: false
+        nopassword: true
         state: present
 
     sudoers_manage_user_files: true
@@ -19,7 +19,7 @@
         user: john.doe
         commands:
           - ALL
-        nopassword: false
+        nopassword: true
         state: present
   roles:
     - ../sudoers
