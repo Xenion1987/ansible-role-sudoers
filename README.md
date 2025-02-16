@@ -1,6 +1,9 @@
  Ansible role: sudoers
 ===
 
+[![CI](https://github.com/Xenion1987/ansible-role-sudoers/actions/workflows/ci.yml/badge.svg)](https://github.com/Xenion1987/ansible-role-sudoers/actions/workflows/ci.yml)
+[![Ansible Galaxy downloads](https://img.shields.io/ansible/role/d/Xenion1987/sudoers?label=Galaxy%20downloads&logo=ansible&color=%23096598)](https://galaxy.ansible.com/ui/standalone/roles/Xenion1987/sudoers)
+
 Manage user or group sudoers files on Linux systems.
 
 Requirements
