@@ -23,3 +23,23 @@
         state: present
   roles:
     - "../../sudoers"
+
+  tasks:
+    - name: DEBUG | sudoers_group_file
+      changed_when: false
+      ansible.builtin.shell:
+        executable: /bin/bash
+        cmd: |
+          EXPECTED='%sudoers_mygroupname ALL=NOPASSWD: ALL'
+          if [[ ! $(cat /etc/sudoers.d/sudoers_group_file) == "${EXPECTED}" ]]; then
+            exit 1
+          fi
+    - name: DEBUG | sudoers_user_file
+      changed_when: false
+      ansible.builtin.shell:
+        executable: /bin/bash
+        cmd: |
+          EXPECTED='john.doe ALL=NOPASSWD: ALL'
+          if [[ ! $(cat /etc/sudoers.d/sudoers_user_file) == "${EXPECTED}" ]]; then
+            exit 1
+          fi
