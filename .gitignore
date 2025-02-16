@@ -170,3 +170,6 @@ cython_debug/
 # VSCode
 .devcontainer/
 .vscode/
+
+# Custom
+.ci
