@@ -1,5 +1,6 @@
 # Ansible
 meta/.galaxy_install_info
+.ansible
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -165,5 +166,7 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# VSCode
+# IDE
 .devcontainer/
+.idea/
+.vscode/
