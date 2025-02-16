@@ -10,7 +10,6 @@
 - name: INCLUDE TASKS | 'manage_sudoers.yml' for groups
   loop: "{{ sudoers_groups }}"
   when:
-    - sudoers_install_sudo
     - sudoers_manage_group_files
   ansible.builtin.include_tasks:
     file: manage_sudoers.yml
@@ -18,7 +17,6 @@
 - name: INCLUDE TASKS | 'manage_sudoers.yml' for users
   loop: "{{ sudoers_users }}"
   when:
-    - sudoers_install_sudo
     - sudoers_manage_user_files
   ansible.builtin.include_tasks:
     file: manage_sudoers.yml
