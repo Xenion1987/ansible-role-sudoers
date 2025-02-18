@@ -55,8 +55,7 @@ jobs:
           [ -s requirements.yml ] && ansible-galaxy collection install -r requirements.yml
 
       - name: Install Ansible
-        run: |
-          pip install ansible
+        run: pip install ansible
 
       - name: Run Ansible Playbook
         run: ansible-playbook  -i tests/inventory.yml tests/test.yml
