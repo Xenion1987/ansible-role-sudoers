@@ -15,5 +15,10 @@ ansible-test:
   stage: test
   image: python:slim-bookworm
   script:
-    - python -m pip install 'ansible>=3.0.0'
+    - python -m pip install --upgrade -q pip && pip install 'ansible>=3.0.0'
+    - |
+      [[ -f requirements.yml ]] && pip install --upgrade -q -r requirements.txt
+    - |
+      [[ -f requirements.yml ]] && ansible-galaxy install --force -r requirements.yml
+    - sed -i "s,../../sudoers,../../$CI_PROJECT_NAME," tests/test.yml
     - ansible-playbook tests/test.yml
