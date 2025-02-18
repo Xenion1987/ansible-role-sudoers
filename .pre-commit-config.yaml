@@ -7,7 +7,7 @@ repos:
         name: Cleanup trailing whitespaces
         args: [--markdown-linebreak-ext=md]
   - repo: https://github.com/ansible-community/ansible-lint
-    rev: v25.1.1
+    rev: v25.1.2
     hooks:
       - id: ansible-lint
         name: Check Ansible files
