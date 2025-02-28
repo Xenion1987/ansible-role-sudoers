@@ -9,5 +9,4 @@ exclude_paths:
   - .ansible/
   - .git/
   - .github/
-  - tests/
   - venv/
