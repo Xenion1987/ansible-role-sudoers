@@ -1,0 +1,44 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  vars:
+    sudoers_manage_group_files: true
+    sudoers_groups:
+      - name: sudoers_mygroupname # sudoers.d/FILENAME
+        group: sudoers_mygroupname
+        commands:
+          - ALL
+        nopassword: true
+        state: present
+
+    sudoers_manage_user_files: true
+    sudoers_users:
+      - name: sudoers_john.doe # sudoers.d/FILENAME
+        user: sudoers_john.doe
+        commands:
+          - ALL
+        nopassword: true
+        state: present
+
+  tasks:
+    - name: Get group sudoers file
+      changed_when: false
+      register: group_sudoers_file
+      ansible.builtin.command:
+        cmd: cat /etc/sudoers.d/{{ sudoers_groups[0].name }}
+
+    - name: Get user sudoers file
+      changed_when: false
+      register: user_sudoers_file
+      ansible.builtin.command:
+        cmd: cat /etc/sudoers.d/{{ sudoers_users[0].name }}
+
+    - name: ASSERT | Sudoers files as configured
+      ansible.builtin.assert:
+        that:
+          - group_sudoers_file.stdout_lines[0] == '%sudoers_groups[0].group ALL=NOPASSWD: ALL'
+          - user_sudoers_file.stdout_lines[0] == 'sudoers_users[0].name ALL=NOPASSWD: ALL'
+        success_msg:
+          - "{{ group_sudoers_file.stdout_lines[0] }} == '%{{ sudoers_groups[0].name }} ALL=NOPASSWD: ALL'"
+          - "{{ user_sudoers_file.stdout_lines[0] }} == '{{ sudoers_users[0].name }} ALL=NOPASSWD: ALL'"

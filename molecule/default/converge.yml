@@ -1,0 +1,41 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: false
+
+  pre_tasks:
+    - name: PRE_TASK | Install python3
+      changed_when: false
+      ansible.builtin.raw: |
+        id_like=$(grep -Ewo "debian|fedora" /etc/os-release | uniq)
+        case "${id_like}" in
+          debian)
+            apt update
+            apt -y install python3
+          ;;
+          fedora)
+            dnf makecache
+            dnf -y install python3
+          ;;
+        esac
+
+  roles:
+    - role: xenion1987.sudoers
+      vars:
+        sudoers_manage_group_files: true
+        sudoers_groups:
+          - name: sudoers_mygroupname # sudoers.d/FILENAME
+            group: sudoers_mygroupname
+            commands:
+              - ALL
+            nopassword: true
+            state: present
+
+        sudoers_manage_user_files: true
+        sudoers_users:
+          - name: sudoers_john.doe # sudoers.d/FILENAME
+            user: sudoers_john.doe
+            commands:
+              - ALL
+            nopassword: true
+            state: present
